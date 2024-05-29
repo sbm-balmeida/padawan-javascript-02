@@ -10,6 +10,11 @@ botaoAdicionar.addEventListener("click", function(event) {
 
     //criando a tr e a td do paciente
     var pacienteTr = montaTr(paciente);
+
+    if (!validaPaciente(paciente)) {
+        console.log("Paciente inválido");
+        return;
+    }
     
     //adicionando o paciente na tabela
     var tabela = document.querySelector("#tabela-pacientes");
@@ -24,8 +29,8 @@ function obtemPacienteDoFormulario(form) {
     var paciente = {
         nome: form.nome.value,
         peso: form.peso.value,
-        altura: form.peso.value,
-        gordura: form.altura.value,
+        altura: form.altura.value,
+        gordura: form.gordura.value,
         imc: calcularImc(form.peso.value, form.altura.value)
     }
     return paciente;
@@ -50,4 +55,12 @@ function montaTd(dado, classe) {
     td.classList.add(classe);
 
     return td;
+}
+
+function validaPaciente(paciente) {
+    if (validaPeso(paciente.peso)) {
+        return true;
+    }else {
+        return false;
+    }
 }
